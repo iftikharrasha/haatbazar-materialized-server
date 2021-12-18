@@ -52,7 +52,7 @@ async function run() {
             res.json(result);
         })
 
-        //Update Api for orders
+        //Update Api for reacts
         app.put('/reaction/:reactId', async(req, res) => {
             const reactId = req.params.reactId;
             const query = { _id: ObjectId(reactId) };
@@ -69,6 +69,13 @@ async function run() {
             const result = await outletsCollection.updateOne(query, updateDoc);
 
             res.json(result);
+        })
+
+        //Post Api for outlets
+        app.post('/add-outlet', async(req, res) => {
+            const collection = req.body; 
+            const result = await outletsCollection.insertOne(collection);
+            res.json(result); 
         })
 
     } finally {
